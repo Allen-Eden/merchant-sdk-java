@@ -40,6 +40,8 @@ public class PayerInfoType{
 	 */ 
 	private String payer;
 
+	private String payerEmail;
+
 	/**
 	 * Unique customer ID Character length and limitations: 17
 	 * single-byte characters	 
@@ -343,7 +345,12 @@ public class PayerInfoType{
 		if (childNode != null && !isWhitespaceNode(childNode)) {
 		    this.payer = childNode.getTextContent();
 		}
-	
+
+		childNode = (Node) xpath.evaluate("Email", node, XPathConstants.NODE);
+		if (childNode != null && !isWhitespaceNode(childNode)) {
+			this.payerEmail = childNode.getTextContent();
+		}
+
 		childNode = (Node) xpath.evaluate("PayerID", node, XPathConstants.NODE);
 		if (childNode != null && !isWhitespaceNode(childNode)) {
 		    this.payerID = childNode.getTextContent();
@@ -391,5 +398,12 @@ public class PayerInfoType{
 		    this.enhancedPayerInfo =  new EnhancedPayerInfoType(childNode);
 		}
 	}
- 
+
+	public String getPayerEmail() {
+		return payerEmail;
+	}
+
+	public void setPayerEmail(String payerEmail) {
+		this.payerEmail = payerEmail;
+	}
 }
